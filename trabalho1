@@ -1,0 +1,65 @@
+//Trabalho desenvolvido por Isabela S. Guimar„es, Jo„o Miguel Matos e Leticia Murbach
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    long long int ean13;
+    int d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12,d0,td1,td3,td5,td7,td9,td11,soma1,soma2,mult,div,digito_verificador;
+    // ean13= variavel que armazena o numero de 13 digitos
+    // d= todas com D s„o variaveis que armazenam os digitos do cÛdigo de barras
+    // td= as variaveis td s„o as que armazenam o valor do triplo dos digitos
+    // soma1= soma de todos os digitos
+    // mult= multiplicaÁ„o
+    // d0 tem q ser igual ao digito verificador
+    // div = divis„o
+
+    cout << "Informe um Numero de 13 digitos" << endl;
+    cin >> ean13;
+
+    if(ean13>999999999999 && ean13<10000000000000){ //esse if È para caso o codigo tenha realmente 13 digitos
+            d0=ean13%10;
+            d1=ean13/10%10;
+            d2=ean13/100%10;
+            d3=ean13/1000%10;
+            d4=ean13/10000%10;
+            d5=ean13/100000%10; //essas divisoes s„o para separar cada digito do numero
+            d6=ean13/1000000%10;
+            d7=ean13/10000000%10;
+            d8=ean13/100000000%10;
+            d9=ean13/1000000000%10;
+            d10=ean13/10000000000%10;
+            d11=ean13/100000000000%10;
+            d12=ean13/1000000000000%10;
+
+            td1=d1*3;
+            td3=d3*3;
+            td5=d5*3; // aqui os digitos impares s„o multiplicados por 3
+            td7=d7*3;
+            td9=d9*3;
+            td11=d11*3;
+
+            // sequencia de contas para obter o digito verificador
+            soma1=td1+d2+td3+d4+td5+d6+td7+d8+td9+d10+td11+d12; // soma o resultado dos td com os digitos pares
+            div=soma1/10; //divisao do resultado da soma anterior por 10
+            soma2=div+1;
+            mult=soma2*10;
+
+            digito_verificador=mult-soma1; //para obter o digito verificador
+                if(digito_verificador%10==0){ //if que verifica se o digito verificador È multiplo de 10
+            digito_verificador=0; //se sim, ele recebe zero
+        }
+            if(d0==digito_verificador){ //se o digito final do codigo for igual ao digito verificador
+                cout<<"Codigo de barras correto"<<endl; //o codigo de barras est· correto
+            }
+            if (d0!=digito_verificador){ //se o digito final do codigo for diferente do digito verificador
+                cout<<"Digito verificador inconsistente"<<endl; //entao o digito È inconsistente
+            }
+
+    }
+
+        else{
+                cout<<"Numero de digitos invalido"<<endl;} //caso nao passe nos testes de tamanho, È invalido
+
+    return 0;
+}
